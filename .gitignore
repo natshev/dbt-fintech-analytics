@@ -1,0 +1,25 @@
+# dbt
+target/
+dbt_packages/
+logs/
+profiles.yml
+.user.yml
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets and local settings
+.env
+.claude/
+
+# Local working notes (not published)
+CLAUDE.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
