@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: Product catalog from raw_products, one row per product.
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+      - name: product_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['cash', 'pos']
+
+  - name: stg_customers
+    description: Customers, current state, one row per customer; NULL employment_type replaced with 'unknown'.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: employment_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['employed', 'self_employed', 'unemployed', 'unknown']
+      - name: risk_segment
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['low', 'medium', 'high']
+
