@@ -1,0 +1,55 @@
+version: 2
+
+sources:
+  - name: raw          # имя источника для source('raw', ...)
+    schema: raw        # схема в базе
+    description: Source system emulation (synthetic data), loaded by scripts/generate_raw.
+    tables:
+      - name: raw_products
+        description: Product catalog, one row per product.
+        columns:
+          - name: product_id
+            data_tests: [unique, not_null]
+      - name: raw_campaigns
+        description: Marketing campaigns, one row per campaign.
+        columns:
+          - name: campaign_id
+            data_tests: [unique, not_null]
+      - name: raw_marketing_spend
+        description: Daily ad spend, one row per campaign and day.
+      - name: raw_customers
+        description: Customers, current state, one row per customer.
+        columns:
+          - name: customer_id
+            data_tests: [unique, not_null]
+      - name: raw_loan_applications
+        description: Loan applications, one row per application.
+        columns:
+          - name: application_id
+            data_tests: [unique, not_null]
+      - name: raw_loans
+        description: Disbursed loans, one row per loan.
+        columns:
+          - name: loan_id
+            data_tests: [unique, not_null]
+      - name: raw_installments
+        description: Planned repayment schedule, one row per loan installment.
+        columns:
+          - name: installment_id
+            data_tests: [unique, not_null]
+      - name: raw_payments
+        description: Customer payments; payment_id is not unique (load duplicates).
+        columns:
+          - name: payment_id
+            data_tests:
+              - not_null
+              - unique:
+                  config:
+                    severity: warn
+      - name: raw_provider_statement
+        description: Payment provider statement, second source for reconciliation.
+        columns:
+          - name: provider_txn_id
+            data_tests: [unique, not_null]
+
+
