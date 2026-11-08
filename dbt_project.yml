@@ -2,3 +2,15 @@ name: fintech_analytics
 version: '1.0.0'
 profile: fintech_analytics
 model-paths: ["models"]
+
+models:
+  fintech_analytics:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table
