@@ -55,4 +55,9 @@ models:
           - accepted_values:
               arguments:
                 values: ['approved', 'rejected', 'cancelled']
+  - name: stg_payments
+    description: Customer payments, one row per payment; load duplicates removed (earliest _loaded_at kept).
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
 
