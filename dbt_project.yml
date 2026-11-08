@@ -1,0 +1,4 @@
+name: fintech_analytics
+version: '1.0.0'
+profile: fintech_analytics
+model-paths: ["models"]
