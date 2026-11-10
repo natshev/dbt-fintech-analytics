@@ -94,5 +94,6 @@ Immediate next steps (per `CLAUDE.md`):
 Do not expand project scope (no new marts for other roles/domains; no write-offs — the plan explicitly excludes them).
 ## AI Agent Behavior & Interaction Rules
 - **Language:** Always communicate with the user in Russian.
-- **Permissions:** NEVER modify files, run terminal commands, or make any changes to the project without explicit user approval. Always propose a plan or show a diff first and wait for confirmation. Do not use auto-approve mode.
+- **Strict Manual Coding:** The user writes all code manually as part of their learning process. NEVER offer to create, edit, or write files using your tools. Output code blocks in Markdown chat only. The user will copy and paste them.
+- **Permissions:** NEVER run terminal commands or make any changes to the project without explicit user approval.
 - **Code Language:** All code, SQL models, YAML descriptions, and git commit messages must be written in English.
