@@ -1,0 +1,10 @@
+snapshots:
+  - name: customers_snapshot
+    description: SCD2 history of raw_customers (region, risk_segment and other attributes).
+    relation: source('raw', 'raw_customers')
+    config:
+      schema: snapshots
+      unique_key: customer_id
+      strategy: timestamp
+      updated_at: updated_at
+
