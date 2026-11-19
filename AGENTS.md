@@ -21,7 +21,7 @@ Repository: `c:\git\dbt-fintech-analytics`, GitHub https://github.com/natshev/db
 - **dbt Core 1.12.6 + dbt-postgres 1.11.0**, installed in `.venv` (Python 3.14.3). Run as `.venv\Scripts\dbt.exe` or with the venv activated. Pin versions explicitly (`dbt-core~=1.12.0`, `dbt-postgres~=1.11.0`) — without pins, pip resolves dbt-core to a 1.13 beta.
 - The new dbt v2 engine does not support Postgres, so the project stays on dbt Core v1; the project language is shared between v1 and v2.
 - **PostgreSQL 18** local Windows install (EDB installer), service `postgresql-x64-18`, port 5432, database `analytics`, user `dbt_user`. SQL execution and data checks are done in DBeaver.
-- No `requirements.txt` currently; environment details live in `CLAUDE.md` (see below).
+- `requirements.txt` pins the dbt packages; install with `pip install -r requirements.txt` inside `.venv`.
 
 ## Repository layout
 
@@ -29,7 +29,7 @@ Repository: `c:\git\dbt-fintech-analytics`, GitHub https://github.com/natshev/db
 - `profiles.yml` — local dbt profile (target `dev`, host 127.0.0.1, db `analytics`, target schema `dbt_dev`, 4 threads). **Gitignored** (see Security).
 - `macros/generate_schema_name.sql` — overrides dbt default `<target_schema>_<layer>`: layer schemas (`staging`, `intermediate`, `marts`) are used as-is.
 - `models/staging/` — 9 `stg_*` models plus `_sources.yml` (source `raw`, 9 tables, key tests) and `_stg_models.yml` (model and column descriptions with tests). `models/intermediate/` and `models/marts/` do not exist yet — create them with the first model of each layer.
-- `snapshots/customers_snapshot.yml` — SCD2 snapshot of `raw_customers` (timestamp strategy on `updated_at`, schema `snapshots`). Newly added, not yet committed.
+- `snapshots/customers_snapshot.yml` — SCD2 snapshot of `raw_customers` (timestamp strategy on `updated_at`, schema `snapshots`). First run done (2000 current rows); change tracking not yet verified.
 - `scripts/generate_raw/` — synthetic data generator: `00_schema.sql` … `09_provider_statement.sql`, one file per table, plus `run_all.sql` (psql runner with `\ir` in dependency order and a control-totals query at the end). Re-runnable: each file drops and recreates its table; `setseed()` before every random insert makes output reproducible; files reading `raw_loans` after its `UPDATE` must order explicitly (physical row order changes).
 - `target/`, `logs/` — dbt artifacts, gitignored.
 - `CLAUDE.md` — local working journal in Russian (gitignored, not on GitHub). It is the authoritative, continuously updated record of progress, decisions, control totals, and environment quirks; consult it for current state before planning work.

@@ -1,0 +1,4 @@
+# Python 3.14; tested with dbt-core 1.12.6 and dbt-postgres 1.11.0
+# Explicit pins: without them pip resolves dbt-core to a 1.13 beta
+dbt-core~=1.12.0
+dbt-postgres~=1.11.0

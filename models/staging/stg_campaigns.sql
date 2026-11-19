@@ -2,12 +2,13 @@
 with source as (
     select * from {{ source('raw', 'raw_campaigns') }}
 ),
+
 renamed as (
     select
-        campaign_id, 
-        campaign_name, 
-        channel, 
-        start_date, 
+        campaign_id,
+        campaign_name,
+        channel,
+        start_date,
         end_date
     from source
 )
