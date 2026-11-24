@@ -45,7 +45,19 @@ Regenerate the raw data (from the project root, PowerShell — psql is not on PA
 
 The `-h 127.0.0.1` matters: without it psql tries IPv6 `::1` first and fails with Permission denied. `run_all.sql` sets `ON_ERROR_STOP` and ends with a control-totals query; expected counts/sums are documented in its header comments — a correct run matches them exactly (e.g. raw_customers 2000 rows, raw_payments 11062 rows of which 73 planted duplicates).
 
-dbt commands (Git Bash / PowerShell):
+Before running dbt, set the database password in the current terminal. PowerShell:
+
+```powershell
+$env:DBT_POSTGRES_PASSWORD = "your_database_password"
+```
+
+Git Bash:
+
+```bash
+export DBT_POSTGRES_PASSWORD="your_database_password"
+```
+
+Then run dbt from the project root:
 
 ```bash
 .venv/Scripts/dbt.exe debug        # verify profile and DB connection
@@ -75,7 +87,7 @@ There is no CI yet; the intended pipeline is GitHub Actions with a Postgres serv
 
 ## Security and privacy
 
-- `profiles.yml` contains the database password in plaintext and is gitignored — keep it that way; never commit it or copy the credential into committed files, issues, or docs.
+- `profiles.yml` reads the database password from the `DBT_POSTGRES_PASSWORD` environment variable and remains gitignored as local machine configuration. Never put the real password in committed files, issues, docs, or screenshots.
 - `CLAUDE.md`, `PLAN.md`, `.user.yml`, `target/`, `logs/`, `.venv/` are all excluded from version control; leave them excluded.
 - All data is synthetic by design. Never present project results as real production or work experience; README and commits must keep the synthetic-data disclaimer.
 
