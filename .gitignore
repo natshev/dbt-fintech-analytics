@@ -17,6 +17,7 @@ __pycache__/
 
 # Local working notes (not published)
 CLAUDE.md
+DBT_NOTES.md
 
 # OS / editor
 .DS_Store
