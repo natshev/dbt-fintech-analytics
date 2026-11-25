@@ -1,8 +1,8 @@
 version: 2
 
 sources:
-  - name: raw          # имя источника для source('raw', ...)
-    schema: raw        # схема в базе
+  - name: raw          # source name for source('raw', ...)
+    schema: raw        # database schema
     description: Source system emulation (synthetic data), loaded by scripts/generate_raw.
     tables:
       - name: raw_products

@@ -82,13 +82,13 @@ There is no CI yet; the intended pipeline is GitHub Actions with a Postgres serv
 - Naming: snake_case; model prefixes `stg_`, `int_`, `dim_`, `fct_` (`mart_` for aggregates if needed); schemas per layer (`staging`, `intermediate`, `marts`, `snapshots`).
 - Model SQL: PostgreSQL dialect, dbt CTE style — import CTE (`source`/`ref`) → logical CTEs → final `select`. Each model file starts with a one-line header comment; non-obvious blocks (especially planted source defects being cleaned) get inline comments.
 - Generator scripts: lowercase SQL, `varchar` rather than text, `int` for integers, English header comment describing grain, distributions, defects, and reproducibility notes (`setseed`, explicit `order by` where row order matters).
-- Language: all project artifacts — README, YAML descriptions, SQL comments, commit messages — are in English. Working notes (`CLAUDE.md`) are in Russian.
+- Language: all project artifacts — README, YAML descriptions, SQL comments, commit messages — are in English. Working notes (`CLAUDE.md`, `DBT_NOTES.md`) are in Russian.
 - No emoji anywhere.
 
 ## Security and privacy
 
 - `profiles.yml` reads the database password from the `DBT_POSTGRES_PASSWORD` environment variable and remains gitignored as local machine configuration. Never put the real password in committed files, issues, docs, or screenshots.
-- `CLAUDE.md`, `PLAN.md`, `.user.yml`, `target/`, `logs/`, `.venv/` are all excluded from version control; leave them excluded.
+- `CLAUDE.md`, `DBT_NOTES.md`, `PLAN.md`, `.user.yml`, `target/`, `logs/`, `.venv/` are all excluded from version control; leave them excluded.
 - All data is synthetic by design. Never present project results as real production or work experience; README and commits must keep the synthetic-data disclaimer.
 
 ## Current status and roadmap
@@ -109,3 +109,4 @@ Do not expand project scope (no new marts for other roles/domains; no write-offs
 - **Strict Manual Coding:** The user writes all code manually as part of their learning process. NEVER offer to create, edit, or write files using your tools. Output code blocks in Markdown chat only. The user will copy and paste them.
 - **Permissions:** NEVER run terminal commands or make any changes to the project without explicit user approval.
 - **Code Language:** All code, SQL models, YAML descriptions, and git commit messages must be written in English.
+- **Learning Notes:** Maintain the local Russian `DBT_NOTES.md`. When explaining a new dbt topic or answering a project-related learning question, append a concise section with the definition, rationale, an example from this project, limitations, and verification steps where applicable. Keep it gitignored and never include real credentials.

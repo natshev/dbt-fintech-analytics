@@ -1,6 +1,6 @@
 -- run_all.sql: rebuilds all raw tables (source emulation) in dependency order.
 -- Run from the project root (PowerShell):
---   & "C:\Program Files\PostgreSQL\18\bin\psql.exe" -U dbt_user -d analytics -f scripts/generate_raw/run_all.sql
+--   & "C:\Program Files\PostgreSQL\18\bin\psql.exe" -h 127.0.0.1 -U dbt_user -d analytics -f scripts/generate_raw/run_all.sql
 -- \ir resolves file names relative to this file, so the current folder does not matter.
 -- 08_payments.sql updates raw_loans.status, so it must run after 06 and 07.
 
